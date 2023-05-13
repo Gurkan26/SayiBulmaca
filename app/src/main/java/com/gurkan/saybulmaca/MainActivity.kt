@@ -1,6 +1,7 @@
 package com.gurkan.saybulmaca
 
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
@@ -144,6 +145,14 @@ class MainActivity : AppCompatActivity(), View.OnTouchListener {
             val row = game_board.getChildAt(i) as LinearLayout
             for (j in 0 until row.childCount) {
                 row.getChildAt(j).setOnTouchListener(this)
+            }
+        }
+        button.setOnClickListener {
+            if (foundNumber != 0) {
+
+                imageView.visibility = View.GONE
+
+
             }
         }
 
@@ -308,9 +317,9 @@ class MainActivity : AppCompatActivity(), View.OnTouchListener {
         if (isFound) {
             findViewById<TextView>(dictionary.getValue(foundWord)).setTextColor(resources.getColor(R.color.green))
             foundNumber++
-            if (foundNumber == 6) {
+            if (foundNumber == 9) {
 
-               // showMessage()
+                showMessage()
             }
 
         } else {
@@ -331,13 +340,13 @@ class MainActivity : AppCompatActivity(), View.OnTouchListener {
             .setPositiveButton("Harikayım") { dialog, _ -> dialog.dismiss() }
         val alert = builder.create()
         alert.show()
-       // playSound()
+        playSound()
         imageView.visibility = View.VISIBLE
     }
 
     fun playSound() {
-       // val mediaPlayer = MediaPlayer.create(this, R.raw.alkis)
-      //  mediaPlayer.start()
+        val mediaPlayer = MediaPlayer.create(this, R.raw.alkis)
+        mediaPlayer.start()
     }
 
     private fun flagHelper(start: Int, end: Int, isHorizontal: Boolean) {
@@ -363,7 +372,17 @@ class MainActivity : AppCompatActivity(), View.OnTouchListener {
 
     companion object {
         val answers =
-            arrayOf(Sayi("35"), Sayi("114"), Sayi("23"), Sayi("61"), Sayi("108"), Sayi("144"), Sayi("22"), Sayi("84"), Sayi("12"))
+            arrayOf(
+                Sayi("35"),
+                Sayi("114"),
+                Sayi("23"),
+                Sayi("61"),
+                Sayi("108"),
+                Sayi("144"),
+                Sayi("22"),
+                Sayi("84"),
+                Sayi("12")
+            )
         const val letters = "0123456789"
         const val dim = 8
         val dictionary = mapOf(
